@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/fragment.html :: headFragment (pageTitle='AddCategory')"></div>
+    <title>Add Categories</title>
+</head>
+<body>
+    <div class="container my-5">
+        <h3> Add Category</h3>
+        <div class="card">
+            <div class="card-body">
+                <div class="col-md-10">
+                    <form action="#" th:action="@{/categories}" th:object="${category}" method="post">
+                        <div class="row">
+                            <div class="form-group col-md-8 required">
+                                <label for="name" class="col-form-label control-label">Name</label>
+                                <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Name">
+                                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="parentCategory" class="col-form-label">Parent Category</label>
+                                <select class="form-control" id="parentCategory">
+                                    <option selected>Select parent category</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-8">
+                                <label for="description" class="col-form-label">Description</label>
+<!--                                <input type="text" th:field="*{description}" class="form-control" id="description" placeholder="Description">-->
+                                <textarea th:field="*{description}" class="form-control" id="description" placeholder="Description" rows="3"></textarea>
+                                <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input type="checkbox" th:checked="${category.isActive}" class="form-check-input" id="isActive">
+                                    <label class="form-check-label" for="isActive">Active</label>
+                                </div>
+
+                                <div class="form-group col-md-8 required">
+                                    <label for="name" class="col-form-label control-label">Active From</label>
+                                    <input type="date" th:field="*{activeFrom}" class="form-control" id="activeFrom">
+                                </div>
+
+                                <div class="form-group col-md-8 required">
+                                    <label for="activeTo" class="col-form-label control-label">Active To</label>
+                                    <input type="date" th:field="*{activeTo}" class="form-control" id="activeTo">
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <input type="submit" class="btn btn-primary" value="Add Student">
+                            </div>
+
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
