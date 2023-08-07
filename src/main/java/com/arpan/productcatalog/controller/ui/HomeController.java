@@ -3,9 +3,14 @@ package com.arpan.productcatalog.controller.ui;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HomeController {
+    @GetMapping("/greet")
+    public @ResponseBody String greeting() {
+        return "Hello, World";
+    }
 
     @GetMapping(value = {"", "/", "/home", ".dashboard"})
     public String home() {

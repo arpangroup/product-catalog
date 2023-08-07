@@ -63,3 +63,46 @@ Note: ./ means that that the directory or file is relative to the current workin
   <scope>runtime</scope>
 </dependency>
 ```
+
+# Setup the MockMVC
+https://rieckpil.de/guide-to-testing-spring-boot-applications-with-mockmvc/
+https://spring.io/guides/gs/testing-web/
+https://www.geeksforgeeks.org/spring-boot-mockmvc-testing-with-example-project/
+```
+class TaskControllerTest {
+ 
+  private MockMvc mockMvc;
+ 
+  @BeforeEach
+  public void setup() {
+    this.mockMvc = MockMvcBuilders.standaloneSetup(new TaskController(new TaskService()))
+      .setControllerAdvice()
+      .setLocaleResolver(localResolver)
+      .addInterceptors(interceptorOne)
+      .build();
+  }
+}
+```
+or,
+```
+@WebMvcTest(TaskController.class)
+public class TaskControllerSecondTest {
+ 
+  @Autowired
+  private WebApplicationContext context;
+ 
+  @MockBean
+  private TaskService taskService;
+ 
+  protected MockMvc mockMvc;
+ 
+  @BeforeEach
+  public void setup() {
+    this.mockMvc = MockMvcBuilders
+      .webAppContextSetup(this.context)
+      .apply(springSecurity())
+      .build();
+  }
+ 
+}
+```

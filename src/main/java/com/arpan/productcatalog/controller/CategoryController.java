@@ -3,6 +3,7 @@ package com.arpan.productcatalog.controller;
 import com.arpan.productcatalog.entity.product.ProductCategory;
 import com.arpan.productcatalog.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,9 +20,8 @@ public class CategoryController {
     }
 
     @PostMapping("")
-    public List<ProductCategory> saveNewCategory(@RequestBody ProductCategory employee) {
-        categoryRepository.save(employee);
-        return categoryRepository.findAll();
+    public ResponseEntity<ProductCategory> saveNewCategory(@RequestBody ProductCategory category) {
+        return ResponseEntity.ok(categoryRepository.save(category));
     }
 
 }

@@ -47,4 +47,8 @@ public class ProductCategory extends Auditable {
     @OneToMany(mappedBy = "category")
     @NotAudited
     Set<CategoryMedia> medias;
+
+    public ProductCategory(String name) {
+        this.name = name;
+    }
 }
