@@ -1,25 +1,19 @@
 package com.arpan.productcatalog.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import com.arpan.productcatalog.entity.product.ProductCategory;
+import com.arpan.productcatalog.entity.product.Category;
 import com.arpan.productcatalog.repository.CategoryRepository;
 import com.arpan.productcatalog.service.CategoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -34,8 +28,8 @@ class CategoryControllerTest {
 
     MockMvc mockMvc;
 
-    ProductCategory CATEGORY_1 = new ProductCategory("cat1");
-    ProductCategory CATEGORY_2 = new ProductCategory("cat2");
+    Category CATEGORY_1 = new Category("cat1");
+    Category CATEGORY_2 = new Category("cat2");
 
     @Test
     public void contextLoads() throws Exception {
@@ -96,21 +90,21 @@ class CategoryControllerTest {
 
     @Test
     public void getAllCategoriesTest() {
-        List<ProductCategory> mockCategoryList = Arrays.asList(CATEGORY_1, CATEGORY_2);
+        List<Category> mockCategoryList = Arrays.asList(CATEGORY_1, CATEGORY_2);
         when(repository.findAll()).thenReturn(mockCategoryList);
         //assertEquals(2, service.getCategories().size());
     }
 
     @Test
     public void saveCategoryTest() {
-        ProductCategory category = new ProductCategory("cat1");
+        Category category = new Category("cat1");
         when(repository.save(category)).thenReturn(category);
         //assertEquals(category, service.addCategory(category));
     }
 
     @Test
     public void deleteCategoryTest() {
-        ProductCategory category = new ProductCategory("cat1");
+        Category category = new Category("cat1");
         //service.deleteCategory(category);
         //verify(repository, times(1)).delete(category);
     }
@@ -118,17 +112,17 @@ class CategoryControllerTest {
 
     @Test
     public void testGetCategoryById__Success() {
-        ProductCategory category = new ProductCategory();
+        Category category = new Category();
         category.setName("cat1");
-        when(repository.findById(1)).thenReturn(Optional.of(category));
+        when(repository.findById(1L)).thenReturn(Optional.of(category));
 
-        ProductCategory expectedCategory = service.getCategoryById(1);
+        Category expectedCategory = service.getCategoryById(1);
         assertEquals("cat1", expectedCategory.getName());
     }
 
     @Test
     public void getAllCategoriesTest_success() throws Exception {
-        List<ProductCategory> mockCategoryList = Arrays.asList(CATEGORY_1, CATEGORY_2);
+        List<Category> mockCategoryList = Arrays.asList(CATEGORY_1, CATEGORY_2);
         when(repository.findAll()).thenReturn(mockCategoryList);
         //assertEquals(2, service.getCategories().size());
     }

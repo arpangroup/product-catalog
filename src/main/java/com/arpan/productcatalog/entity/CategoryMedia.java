@@ -1,7 +1,7 @@
 package com.arpan.productcatalog.entity;
 
 import com.arpan.productcatalog.entity.key.CategoryMediaKey;
-import com.arpan.productcatalog.entity.product.ProductCategory;
+import com.arpan.productcatalog.entity.product.Category;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,7 +22,7 @@ public class CategoryMedia implements Serializable {
     @ManyToOne
     @MapsId("categoryId")
     @JoinColumn(name = "category_id")
-    private ProductCategory category;
+    private Category category;
 
     @ManyToOne
     @MapsId("mediaId")

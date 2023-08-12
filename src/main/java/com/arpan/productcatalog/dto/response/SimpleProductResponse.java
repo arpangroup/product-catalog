@@ -1,6 +1,6 @@
 package com.arpan.productcatalog.dto.response;
 
-public record ProductResponse (
+public record SimpleProductResponse(
         Long productId,
         String productName,
         String productCode,

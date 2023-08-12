@@ -1,6 +1,6 @@
 package com.arpan.productcatalog.controller.ui;
 
-import com.arpan.productcatalog.entity.product.ProductCategory;
+import com.arpan.productcatalog.entity.product.Category;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CategoryUiController {
 
     @GetMapping("")
-    public String getAllCategories (Model model, ProductCategory category) {
+    public String getAllCategories (Model model, Category category) {
         //model.addAttribute("users", userRepository.findAll());
         return "add-category.html";
     }
 
 
     @PostMapping("")
-    public String createNewCategory (Model model, ProductCategory category) {
+    public String createNewCategory (Model model, Category category) {
         //model.addAttribute("users", userRepository.findAll());
         return "index.html";
     }

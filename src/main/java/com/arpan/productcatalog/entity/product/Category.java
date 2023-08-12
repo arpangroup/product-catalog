@@ -1,25 +1,24 @@
 package com.arpan.productcatalog.entity.product;
 
 import com.arpan.productcatalog.entity.Auditable;
+import com.arpan.productcatalog.entity.Catalog;
 import com.arpan.productcatalog.entity.CategoryMedia;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 
 import java.sql.Date;
 import java.util.Set;
 
-@Entity(name = "tbl_product_category")
+@Entity(name = "tbl_category")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Audited
-public class ProductCategory extends Auditable {
+@Builder
+public class Category extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -30,16 +29,16 @@ public class ProductCategory extends Auditable {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_category_id", referencedColumnName = "id")
-    private ProductCategory parentCategory;
+    private Category parentCategory;
 
-    @Column(name = "description", length = 255, nullable = true, insertable = true, updatable = true, unique = false)
+    @Column(name = "description")
     private String description;
 
     @Column(name = "is_active")
     private boolean isActive;
 
     @Column(name = "sort_order", length = 1)
-    private int sortOrder;
+    private Integer sortOrder;
 
     private Date activeFrom;
     private Date activeTo;
@@ -48,7 +47,11 @@ public class ProductCategory extends Auditable {
     @NotAudited
     Set<CategoryMedia> medias;
 
-    public ProductCategory(String name) {
+    @ManyToOne
+    @JoinColumn(name = "catalog_id", nullable = false)
+    Catalog catalog;
+
+    public Category(String name) {
         this.name = name;
     }
 }
