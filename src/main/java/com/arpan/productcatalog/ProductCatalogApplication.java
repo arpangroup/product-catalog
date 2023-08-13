@@ -4,6 +4,7 @@ import com.arpan.productcatalog.entity.Catalog;
 import com.arpan.productcatalog.entity.Store;
 import com.arpan.productcatalog.entity.product.Category;
 import com.arpan.productcatalog.repository.CatalogRepository;
+import com.arpan.productcatalog.service.CatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
@@ -22,8 +23,8 @@ import java.util.stream.Collectors;
 @EnableTransactionManagement
 @EnableJpaRepositories(repositoryFactoryBeanClass = EnversRevisionRepositoryFactoryBean.class)
 public class ProductCatalogApplication implements CommandLineRunner {
-	@Autowired
-	CatalogRepository catalogRepository;
+	@Autowired CatalogRepository catalogRepository;
+	@Autowired CatalogService catalogService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProductCatalogApplication.class, args);
@@ -35,6 +36,7 @@ public class ProductCatalogApplication implements CommandLineRunner {
 		System.out.println("##########################");
 		System.out.println(customer);
 		System.out.println(customer.getFullName());
+		catalogService.getAllCatalogSummary(1252L).forEach(System.out::println);
 		//catalogRepository.save(generateDefaultCatalog("MyStore"));
 		System.out.print("Catalog: ");
 		catalogRepository.findAll().stream().map(Catalog::getCatalogName).forEach(System.out::println);

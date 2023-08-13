@@ -60,6 +60,9 @@ public class GlobalRestExceptionHandler {
     public List<ValidationErrors> handleConstraintViolation(ConstraintViolationException ex) {
         //log.debug("Constraint violation exception encountered: {}", ex.getConstraintViolations(), ex);
         //return buildValidationErrors(ex.getConstraintViolations());
+        ex.getConstraintViolations().forEach(cex -> {
+            System.out.println(cex.getMessage());
+        });
         return null;
     }
 

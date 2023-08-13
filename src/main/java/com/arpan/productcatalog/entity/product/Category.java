@@ -13,7 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tbl_category", indexes = {
-        @Index(name = "uniqueCatalogCategoryName", columnList = "catalog_id, name", unique = true)
+        @Index(name = "uniqueCatalogIdCategoryName", columnList = "catalog_id, name", unique = true)
 })
 @Data
 @AllArgsConstructor

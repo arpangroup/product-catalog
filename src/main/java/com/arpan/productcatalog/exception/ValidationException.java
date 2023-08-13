@@ -8,5 +8,9 @@ public class ValidationException extends BaseValidationException{
     public ValidationException(ErrorCode errorCode, String fieldName) {
         super(errorCode, fieldName);
     }
+
+    public ValidationException(String message) {
+        super(message);
+    }
 }
 

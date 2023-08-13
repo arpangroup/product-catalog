@@ -7,7 +7,7 @@ import com.arpan.productcatalog.entity.product.Category;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CategoryMapper {
+public final class CategoryMapper {
     public SimpleCategoryResponse mapTo(Category category) {
         return new SimpleCategoryResponse(category.getId(), category.getName());
     }
