@@ -8,6 +8,7 @@ import com.arpan.productcatalog.entity.product.Category;
 import com.arpan.productcatalog.exception.ErrorCode;
 import com.arpan.productcatalog.exception.ValidationException;
 import com.arpan.productcatalog.mapper.StoreMapper;
+import com.arpan.productcatalog.repository.CatalogRepository;
 import com.arpan.productcatalog.repository.StoreRepository;
 import com.arpan.productcatalog.service.StoreService;
 import jakarta.transaction.Transactional;
@@ -22,13 +23,15 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class StoreServiceImpl implements StoreService {
     private final StoreRepository repository;
+    private final CatalogRepository catalogRepository;
     private final StoreMapper mapper;
 
     @Override
     @Transactional
     public Store createStore(StoreCreateRequest request) throws ValidationException{
         // Step1: if the store already exist, change the store name
-        int existingStore = repository.countDistinctNameByNameIgnoreCase(request.getStoreName());
+        //int existingStore = repository.countDistinctNameByNameIgnoreCase(request.getStoreName());
+        int existingStore = repository.countDistinctNameByNameStartsWithIgnoreCase(request.getStoreName());
         if(existingStore > 0) {
             request.setStoreName(request.getStoreName() + "-" + existingStore);
         }
@@ -37,7 +40,9 @@ public class StoreServiceImpl implements StoreService {
         Store store = mapper.mapFrom(request);
 
         // Step3: Create and Attach Default Catalog
-        store.attachCatalog(generateDefaultCatalog(store));
+        Catalog catalog = generateDefaultCatalog(store);
+        catalog = catalogRepository.save(catalog);
+        store.attachCatalog(catalog);
 
         // Step4: Save the Store into DB
         return repository.save(store);

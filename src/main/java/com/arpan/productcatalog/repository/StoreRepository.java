@@ -14,4 +14,6 @@ public interface StoreRepository extends RevisionRepository<Store, Long, Long>, 
     Optional<Store> findByNameIgnoreCase(String name);
     Optional<Store> findByExternalReferenceId(UUID externalReferenceId);
     Integer countDistinctNameByNameIgnoreCase(String storeName);
+    Integer countDistinctNameByNameStartsWithIgnoreCase(String storeName);
+
 }

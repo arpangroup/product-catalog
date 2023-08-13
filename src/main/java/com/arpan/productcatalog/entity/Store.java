@@ -21,6 +21,8 @@ import java.util.UUID;
 public class Store extends Auditable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "storeSeq")
+    //@SequenceGenerator(name = "storeSeq", sequenceName = "store_id_seq", allocationSize = 1)
     @Column(name = "id")
     private Long id;
 
@@ -35,7 +37,7 @@ public class Store extends Auditable{
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "store_catalog",
+            name = "tbl_store_catalog",
             joinColumns = @JoinColumn(name = "store_id"),
             inverseJoinColumns = @JoinColumn(name = "catalog_id"))
     Set<Catalog> catalogs = new HashSet<>();

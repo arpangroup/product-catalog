@@ -4,22 +4,22 @@ import com.arpan.productcatalog.entity.product.Category;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "tbl_catalog")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = false)
 @Audited
 public class Catalog extends Auditable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "catalogSeq")
+    //@SequenceGenerator(name = "catalogSeq", sequenceName = "catalog_id_seq", allocationSize = 1)
     @Column(name = "id")
     private Long id;
 
@@ -35,10 +35,10 @@ public class Catalog extends Auditable{
     private String ownerName;
 
     @ManyToMany(mappedBy = "catalogs")
-    Set<Store> stores = new HashSet<>();
+    List<Store> stores = new ArrayList<>();
 
-    @OneToMany(mappedBy = "catalog")
-    Set<Category> categories = new HashSet<>();
+    @OneToMany(mappedBy = "catalog", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    List<Category> categories = new ArrayList<>();
 
     public Catalog(String catalogName) {
         this.catalogName = catalogName;
@@ -53,4 +53,10 @@ public class Catalog extends Auditable{
         this.categories.add(category);
         return this;
     }
+    @PrePersist
+    private void prePersist() {
+        categories.forEach(category -> category.setCatalog(this));
+        stores.forEach(store -> store.attachCatalog(this));
+    }
 }
+
