@@ -13,7 +13,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(
@@ -86,7 +87,19 @@ public class Product extends Auditable {
     @Column(name = "is_active")
     private boolean isActive;
 
+    @ManyToMany(mappedBy = "products")
+    private List<Category> categoryList = new ArrayList<>();
+
     @OneToMany(mappedBy = "product")
     @NotAudited
-    Set<ProductMedia> medias;
+    List<ProductMedia> medias = new ArrayList<>();
+
+    public Product (String productName) {
+        this.name = productName;
+    }
+    
+    public Product addCategory(Category category) {
+        categoryList.add(category);
+        return this;
+    }
 }

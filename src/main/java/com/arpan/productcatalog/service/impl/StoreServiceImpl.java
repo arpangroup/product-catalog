@@ -5,6 +5,7 @@ import com.arpan.productcatalog.dto.response.SimpleStoreResponse;
 import com.arpan.productcatalog.entity.Catalog;
 import com.arpan.productcatalog.entity.Store;
 import com.arpan.productcatalog.entity.product.Category;
+import com.arpan.productcatalog.entity.product.Product;
 import com.arpan.productcatalog.exception.ErrorCode;
 import com.arpan.productcatalog.exception.ValidationException;
 import com.arpan.productcatalog.mapper.StoreMapper;
@@ -15,6 +16,7 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -78,6 +80,7 @@ public class StoreServiceImpl implements StoreService {
 
         // Create and attach Default Category to the catalog
         Category category = new Category("Products");
+        category.setProducts(Arrays.asList(new Product("Product1"), new Product("Product2")));
         catalog.attachCategory(category);
 
         return catalog;

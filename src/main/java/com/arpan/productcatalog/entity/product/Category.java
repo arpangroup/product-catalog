@@ -4,12 +4,16 @@ import com.arpan.productcatalog.entity.Auditable;
 import com.arpan.productcatalog.entity.Catalog;
 import com.arpan.productcatalog.entity.CategoryMedia;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 
 import java.sql.Date;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tbl_category", indexes = {
@@ -47,15 +51,27 @@ public class Category extends Auditable {
     private Date activeFrom;
     private Date activeTo;
 
-    @OneToMany(mappedBy = "category")
-    @NotAudited
-    Set<CategoryMedia> medias;
-
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "catalog_id", nullable = false)
     Catalog catalog;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "tbl_product_category_product",
+            joinColumns = @JoinColumn(name = "product_category_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private List<Product> products = new ArrayList<>();
+
+    @OneToMany(mappedBy = "category")
+    @NotAudited
+    private List<CategoryMedia> medias = new ArrayList<>();
+
     public Category(String name) {
         this.name = name;
+    }
+
+    public Category addProduct (Product product) {
+        products.add(product);
+        return this;
     }
 }

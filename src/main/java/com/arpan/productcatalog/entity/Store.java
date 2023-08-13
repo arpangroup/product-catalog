@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.envers.Audited;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Entity(name = "tbl_store")
 @Table(indexes = {
@@ -40,7 +38,7 @@ public class Store extends Auditable{
             name = "tbl_store_catalog",
             joinColumns = @JoinColumn(name = "store_id"),
             inverseJoinColumns = @JoinColumn(name = "catalog_id"))
-    Set<Catalog> catalogs = new HashSet<>();
+    List<Catalog> catalogs = new ArrayList<>();
 
     public Store(@NonNull String storeName) {
         this.name = storeName;
