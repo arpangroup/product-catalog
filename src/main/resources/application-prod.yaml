@@ -4,8 +4,8 @@ spring:
       platform: postgresql
   datasource:
     url: jdbc:postgresql://localhost:5432/tesa
-    username:
-    password: hh
+    username: arpanjana
+    password:
     hikari:
       connection-timeout: 20000
       maximum-pool-size: 5

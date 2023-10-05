@@ -11,9 +11,10 @@ public enum ErrorCode {
     ERROR_DUPLICATE_STORE_NAME("STORE004", "storeName already exist"),
 
     // CATALOG
-    ERROR_CATALOG_NAME_SHOULD_NOT_BE_NULL("CATALOG001", "catalogName should not be null"),
-    ERROR_CATALOG_NAME_INVALID_LENGTH("CATALOG002", "catalogName should be minimum 4 characters long and maximum 50 characters long"),
-    ERROR_DUPLICATE_CATALOG("CATALOG003", "catalogName already exist for this store");
+    ERROR_CATALOG_ID_NOT_FOUND("CATALOG001", "catalogID not found"),
+    ERROR_CATALOG_NAME_SHOULD_NOT_BE_NULL("CATALOG002", "catalogName should not be null"),
+    ERROR_CATALOG_NAME_INVALID_LENGTH("CATALOG003", "catalogName should be minimum 4 characters long and maximum 50 characters long"),
+    ERROR_DUPLICATE_CATALOG("CATALOG004", "catalogName already exist for this store");
 
     private final String errorCode;
     private final String description;

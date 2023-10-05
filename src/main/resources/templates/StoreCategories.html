@@ -71,7 +71,7 @@
                                     style="width: 40px; height:40px; display:block; align-items: center; margin-right: 8px; margin-top:-8px;">
                                 <div class="">
                                     <h6 class="card-subtitle">Catalog</h6>
-                                    <h5 class="card-subtitle">arpan-demo-store Catalog</h5>
+                                    <h5 class="card-subtitle">arpan-demo-webStore Catalog</h5>
                                 </div>
                             </div> 
                             <div class="btn-group float-right" role="group" style="margin-top: -35px;" aria-label="Basic example">
@@ -102,7 +102,7 @@
                               <button class="nav-link active" id="categories-tab" data-bs-toggle="tab" data-bs-target="#categories" type="button" role="tab" aria-controls="categories" aria-selected="true">Categories</button>
                             </li>
                             <li class="nav-item" role="presentation">
-                              <button class="nav-link" id="stores-tab" data-bs-toggle="tab" data-bs-target="#stores" type="button" role="tab" aria-controls="stores" aria-selected="false">Stores</button>
+                              <button class="nav-link" id="webStores-tab" data-bs-toggle="tab" data-bs-target="#webStores" type="button" role="tab" aria-controls="webStores" aria-selected="false">Stores</button>
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
@@ -155,7 +155,7 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="stores" role="tabpanel" aria-labelledby="stores-tab">
+                            <div class="tab-pane fade" id="webStores" role="tabpanel" aria-labelledby="webStores-tab">
                                 <div class="mt-0" style="border: 1px solid #dee2e6;">
                                     <div class="p-2 pt-3" >
                                         <div style="display: flex;">
@@ -175,7 +175,7 @@
                                         </thead>
                                         <tbody id="myTable1">
                                         <tr>
-                                            <td><a th:href="@{/}">arpan-demo-store</a></td>
+                                            <td><a th:href="@{/}">arpan-demo-webStore</a></td>
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="Basic example">
                                                     <button type="button" class="btn btn-sm btn-outline-secondary btn-primary">Edit</button>
@@ -184,7 +184,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="2" style="text-align: center"><a href="#" th:href="@{/StoreList}">View all</a></td>
+                                            <td colspan="2" style="text-align: center"><a href="#" th:href="@{/webStores}">View all</a></td>
                                         </tr>
                                         </tbody>
                                     </table>

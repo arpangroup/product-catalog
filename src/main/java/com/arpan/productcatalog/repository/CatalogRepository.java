@@ -14,6 +14,8 @@ import java.util.List;
 @Repository
 public interface CatalogRepository extends RevisionRepository<Catalog, Long, Long>, JpaRepository<Catalog, Long> {
     List<Catalog> findByStores_Id(Long storeId);
+    List<Catalog>findByNameIgnoreCase(String name);
+    long countByNameIgnoreCase(String name);
 
 //    @Query("select c from Catalog c join Store s where s.id = :storeId")
 //    List<Catalog> findByStoreId(String storeId);

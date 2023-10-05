@@ -10,12 +10,12 @@ public final class CatalogMapper {
     public CatalogSummary mapToSummary(Catalog catalog) {
         return new CatalogSummary(
                 catalog.getId(),
-                catalog.getCatalogName(),
+                catalog.getName(),
                 catalog.getCategories().size(),
                 0,
                 0,
                 0,
-                catalog.isActive() ? "ACTIVE" : "NON_ACTIVE"
+                catalog.getIsActive() != null && catalog.getIsActive() ? "ONLINE" : "OFFLINE"
         );
     }
 }

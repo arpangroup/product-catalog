@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="fragments/fragment.html :: headFragment (pageTitle='index')"></div>
+</head>
+<!-- assistant_background.png -->
+
+<body>
+<div class="container">
+
+
+    <div class="card" style="margin-top: 16px;">
+        <div class="card-body">
+            <h3>Create New Catalog</h3>
+            <form class="row g-3" th:action="@{/Catalog/create}" th:method="post" th:object="${catalog}">
+                <div class="col-md-6">
+                    <label for="catalogName" class="form-label">Catalog Name</label>
+                    <input type="text" th:field="*{name}" class="form-control" id="catalogName">
+                </div>
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary mt-4">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+
+</html>

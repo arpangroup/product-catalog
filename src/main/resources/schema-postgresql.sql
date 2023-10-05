@@ -1,8 +1,6 @@
 CREATE TABLE IF NOT EXISTS tbl_test(
    ID INT PRIMARY KEY     NOT NULL,
-   NAME           VARCHAR(50)    NOT NULL,
-   ADDRESS        CHAR(50),
-   SALARY         REAL
+   NAME           VARCHAR(50)    NOT NULL
 );
 
 --CREATE TABLE IF NOT EXISTS tbl_accounts (

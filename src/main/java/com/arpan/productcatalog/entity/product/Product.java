@@ -19,7 +19,7 @@ import java.util.List;
 @Entity
 @Table(
         name = "tbl_product",
-        uniqueConstraints = @UniqueConstraint(columnNames = {}),
+        uniqueConstraints = @UniqueConstraint(columnNames = {"product_code"}),
         indexes = {
                 @Index(name = "PRODUCT_CODE_INDEX", columnList = "product_code", unique = true),
                 @Index(name = "PRODUCT_NAME_INDEX", columnList = "name")
@@ -38,10 +38,10 @@ public class Product extends Auditable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name", length = 255, unique = true, nullable = false, insertable = true, updatable = false)
+    @Column(name = "name", length = 255, unique = false, nullable = false, insertable = true, updatable = false)
     private String name;
 
-    @Column(name = "product_code", length = 255)
+    @Column(name = "product_code", length = 255, nullable = true)
     private String productCode; //StockKeepingUnit
 
     @Column(name = "sku", length = 180)
@@ -60,7 +60,7 @@ public class Product extends Auditable {
     @JoinColumn(name = "parent_product_id", referencedColumnName = "id")
     private Product parentProduct;
 
-    @Column(name = "product_type", nullable = false)
+    @Column(name = "product_type", nullable = true)
     @Enumerated(value = EnumType.STRING)
     private ProductType productType = ProductType.PRODUCT;//picklist
 

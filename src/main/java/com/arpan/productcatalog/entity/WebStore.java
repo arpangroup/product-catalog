@@ -6,7 +6,7 @@ import org.hibernate.envers.Audited;
 
 import java.util.*;
 
-@Entity(name = "tbl_store")
+@Entity(name = "tbl_web_store")
 @Table(indexes = {
         @Index(name = "uniqueIndex", columnList = "name", unique = true),
         @Index(name = "uniqueStoreExternalId", columnList = "name, external_reference_id", unique = true),
@@ -16,7 +16,7 @@ import java.util.*;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Audited
-public class Store extends Auditable{
+public class WebStore extends Auditable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "storeSeq")
@@ -33,19 +33,32 @@ public class Store extends Auditable{
     @Column(name = "external_reference_id", length = 100, unique = false, nullable = true)
     private UUID externalReferenceId;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    /*@ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "tbl_store_catalog",
             joinColumns = @JoinColumn(name = "store_id"),
             inverseJoinColumns = @JoinColumn(name = "catalog_id"))
     List<Catalog> catalogs = new ArrayList<>();
 
-    public Store(@NonNull String storeName) {
-        this.name = storeName;
-    }
-
     public Store attachCatalog(Catalog catalog) {
         this.catalogs.add(catalog);
         return this;
+    }*/
+
+
+    @OneToMany(mappedBy = "webStore")
+    List<StoreCatalog> catalogs = new ArrayList<>();
+
+    public WebStore assignCatalog(StoreCatalog storeCatalog) {
+        this.catalogs.add(storeCatalog);
+        return this;
     }
+
+
+    public WebStore(@NonNull String storeName) {
+        this.name = storeName;
+    }
+
+
+
 }

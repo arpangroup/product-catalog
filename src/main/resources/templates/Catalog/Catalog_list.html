@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="fragments/fragment.html :: headFragment (pageTitle='index')"></div>
+</head>
+<!-- assistant_background.png -->
+
+<body>
+    <div class="container-fluid">
+        <div class="row mt-2">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="mt-0">
+                            <div class="p-2" >
+                                <div style="display: flex;">
+                                    <img src="dist/img/avatar.png" th:src="@{/img/webStore.png}" style="width: 32px; height:32px; display:block; align-items: center; margin-right: 8px;;">
+                                    <div class="">
+                                        <h6 th:if="${store != null}" class="card-subtitle">catalog / <a th:href="@{/WebStore/{id}/view(id=${store.id})}" th:text="${store.name}"></a></h6>
+                                        <h5 class="card-subtitle mt-1">Catalogs</h5>
+                                    </div>
+                                </div>
+                                <div class="btn-group float-right" role="group" aria-label="Basic example" style="margin-top: -40px;">
+                                    <input type="text" class="mr-2" placeholder="Search..." />
+                                    <a type="button" class="btn btn-sm btn-outline-secondary btn-primary" th:href="${uriMap.Catalog_NEW_URI}">Create New Catalog</a>
+<!--                                    <button type="button" class="btn btn-sm btn-outline-secondary btn-primary">New</button>-->
+                                </div>
+                            </div>
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Catalog Name</th>
+                                    <th>Site Assignments</th>
+                                    <th>Categories</th>
+                                    <th>Product Owned</th>
+                                    <th>Product Assigned</th>
+                                    <th>Recommendations</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                                <tbody id="myTable">
+                                    <tr th:each="catalog: ${catalogs}">
+                                        <td><a href="#" th:href="@{/Catalog/{id}/view(id=${catalog.catalogId})}" th:text="${catalog.catalogName}">apperal-catalog</a></td>
+                                        <td>Site Generals</td>
+                                        <td th:text="${catalog.numberOfCategories}">10</td>
+                                        <td th:text="${catalog.numberOfProductsOwned}">896</td>
+                                        <td th:text="${catalog.numberOfProductsAssigned}">432</td>
+                                        <td th:text="${catalog.recommendations}">200</td>
+                                        <td th:text="${catalog.status}">ONLINE</td>
+                                    </tr>
+
+                                   <!-- <td>
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary btn-primary">Edit</button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary btn-primary">Delete</button>
+                                        </div>
+                                    </td>-->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

@@ -3,53 +3,7 @@
 
 <head>
     <div th:replace="fragments/fragment.html :: headFragment (pageTitle='dashboard')"></div>
-    <title>index</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.2.2/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
-          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <style>
-        i.fa {
-            display: inline-block;
-            border-radius: 60px;
-            box-shadow: 0 0 2px #888;
-            padding: 0.5em 0.6em;
-
-          }
-          i.fa.success {
-            background-color: green;
-            color: white;
-        }
-        .card-container{
-            padding: 4px;
-        }
-        .card {
-            border-radius: 8px;
-            min-height: 108px;
-        }
-        .card.card_header {
-            min-height: 67.5px;
-        }
-        .card:hover {
-            cursor: pointer;
-        }
-        body{
-            background-color: #e1e1e1;
-        }
-        .card-icon-small-left {
-            width: 48px;
-            height:48px;
-            display:block;
-            align-items: center;
-            margin-right: 8px;
-        }
-    </style>
 </head>
-<!-- assistant_background.png -->
 
 <body>
 <div class="container-fluid">
@@ -59,13 +13,10 @@
                 <div class="card-body">
                     <div>
                         <div class="" style="display: flex;">
-                            <img
-                                    th:src="@{/img/store.png}"
-                                    src="/static/img/store.png"
-                                    style="width: 40px; height:40px; display:block; align-items: center; margin-right: 8px; margin-top:-8px;">
-                            <div class="">
-                                <h5 class="card-subtitle">Store</h5>
-                                    <h5 class="card-subtitle">arpan-demo-store</h5>
+                            <img th:src="@{/img/store.png}" src="/static/img/webStore.png" class="logo">
+                            <div style="margin-top:-4px;">
+                                <h5 class="card-subtitle">Product Catalog</h5>
+                                <h5 class="card-subtitle">Admin Portal</h5>
                             </div>
                         </div>
                         <button type="button" class="btn btn-outline-secondary btn-sm float-right" style="margin-top: -35px;">Change Owner</button>
@@ -82,32 +33,33 @@
                     <h5 class="card-title mt-2">Design Your Store</h5>
                     <div class="row gy-6">
                         <div th:replace="fragments/component.html
-                        :: Card2Column(title='Experience Builder', body='Build, brand, and customize your store.', icon='interaction.png', url='')">
+                        :: Card2Column(title='Orders', body='Build, brand, and customize your webStore.', icon='interaction.png', url='')">
                         </div>
                         <div th:replace="fragments/component.html
-                        :: Card2Column(title='Content Management', body='Create, manage, and reuse content in your store.', icon='content.png', url='')">
+                        :: Card2Column(title='Users', body='Create, manage, and reuse content in your webStore.', icon='content.png', url='')">
                         </div>
                         <div th:replace="fragments/component.html
-                        :: Card2Column(title='Stores', body='Build, brand, and customize your store.', icon='store.png', url='/StoreList')">
+                        :: Card2Column(title='Stores', body='Build, brand, and customize your webStore.', icon='store.png', url=${uriMap.WebStore_LIST_URI})">
                         </div>
+
                         <div th:replace="fragments/component.html
-                        :: Card2Column(title='Catalogs', body='Build, brand, and customize your store.', icon='product.png', url='')">
+                        :: Card2Column(title='Catalogs', body='Build, brand, and customize your webStore.', icon='product.png', url=${uriMap.Catalog_LIST_URI})">
                         </div>
                     </div>
 
                     <h5 class="card-title mt-4">Manage Your Store</h5>
                     <div class="row g-6">
                         <div th:replace="fragments/component.html
-                        :: Card2Column(title='Categories', body='Manage your stores categories', icon='category.png', url='/StoreCategories')">
+                        :: Card2Column(title='Categories', body='Manage your webStores categories', icon='category.png', url=${uriMap.CATEGORY_LIST_URI})">
                         </div>
                         <div th:replace="fragments/component.html
                         :: Card2Column(title='Search', body='Set up filters and searchable fields', icon='magnifying-glass.png', url='')">
                         </div>
                         <div th:replace="fragments/component.html
-                        :: Card2Column(title='Administration', body='Manage store settings and configurations.', icon='settings.png', url='')">
+                        :: Card2Column(title='Administration', body='Manage webStore settings and configurations.', icon='settings.png', url='')">
                         </div>
                         <div th:replace="fragments/component.html
-                        :: Card2Column(title='Import', body='Manage and import data for your store.', icon='import.png', url='')">
+                        :: Card2Column(title='Import', body='Manage and import data for your webStore.', icon='import.png', url='')">
                         </div>
                     </div>
 
@@ -116,13 +68,13 @@
                     <h5 class="card-title mt-4">Go to Workspace</h5>
                     <div class="row gy-6">
                         <div th:replace="fragments/component.html
-                        :: Card2Column(title='Products', body='Manage and create products.', icon='product.png', url='/ProductList')">
+                        :: Card2Column(title='Products', body='Manage and create products.', icon='product.png', url=${uriMap.PRODUCT_LIST_URI})">
                         </div>
                         <div th:replace="fragments/component.html
-                        :: Card2Column(title='Pricing', body='Manage and create price books.', icon='price-list.png', url='')">
+                        :: Card2Column(title='Pricing', body='Manage and create price books.', icon='price-list.png', url=${uriMap.PRICING_LIST_URI})">
                         </div>
                         <div th:replace="fragments/component.html
-                        :: Card2Column(title='Promotions',body='Manage and create promotions.', icon='promotions.png', url='')">
+                        :: Card2Column(title='Promotions',body='Manage and create promotions.', icon='promotions.png', url=${uriMap.PROMOTION_LIST_URI})">
                         </div>
                         <div th:replace="fragments/component.html
                         :: Card2Column(title='Customers', body='Manage and create customers.', icon='people.png', url='')">
@@ -136,46 +88,9 @@
         </div>
         <div class="col-lg-4 col-md-6">
             <div class="card">
-                <img
-                        th:src="@{/img/assistant_background.png}"
-                        src="dist/img/arpan/assistant_background.png" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Get Started Setting Up Your Store</h5>
-
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <i class="fa fa-wrench"></i>
-                            Assign a Catalog to Your Store
-                            <button type="button" class="btn btn-outline-secondary btn-sm float-right">Assign</button>
-                        </li>
-                        <li class="list-group-item">
-                            <i class="fa fa-check success"></i>
-                            Assign Buyer Groups to Your Store
-                            <button type="button" class="btn btn-outline-secondary btn-sm float-right">Assign</button>
-                        </li>
-                        <li class="list-group-item">
-                            <i class="fa">3</i>
-                            Assign Price Books to Your Store
-                            <button type="button" class="btn btn-outline-secondary btn-sm float-right">Assign</button>
-                        </li>
-                        <li class="list-group-item">
-                            <i class="fa">4</i>
-                            Build Your Search Index
-                            <button type="button" class="btn btn-outline-secondary btn-sm float-right">Go to Search</button>
-                        </li>
-                        <li class="list-group-item">
-                            <i class="fa">5</i>
-                            Get Ready to Activate
-                            <button type="button" class="btn btn-outline-secondary btn-sm float-right">Let's Do it!</button>
-                        </li>
-                    </ul>
-
-
-
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <div id="chart-line"></div>
                 </div>
-
             </div>
         </div>
 
@@ -184,5 +99,4 @@
     </div>
 </div>
 </body>
-
 </html>

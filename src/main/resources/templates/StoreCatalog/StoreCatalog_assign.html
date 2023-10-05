@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="fragments/fragment.html :: headFragment (pageTitle='index')"></div>
+</head>
+
+<body>
+<div class="container">
+
+
+    <div class="card" style="margin-top: 16px;">
+        <div class="card-body">
+            <h3 th:text="${selected_storeId != -1 ? 'Assign Store Catalog' : 'New Store Catalog'}">Assign Store Catalog</h3>
+            <form class="row g-3" th:action="@{/StoreCatalog/create}" th:method="post" th:object="${storeCatalogRequest}">
+<!--                <input type="text" th:field="*{storeName}" class="form-control" id="storeName">-->
+                <div class="col-md-6">
+                    <label for="catalog" class="form-label">Catalog</label>
+<!--                    <select id="catalog" class="form-control">-->
+<!--                        <option selected>Choose...</option>-->
+<!--                        <option>...</option>-->
+<!--                    </select>-->
+<!--                    <select name="category">-->
+<!--                        <option th:each="choice : ${allCategories}"-->
+<!--                                th:value="${choice.id}"-->
+<!--                                th:attr="choiceid=${choice.id}, categoryid=*{category.id}, showselected=(${choice.id} == *{category.id})"-->
+<!--                                th:selected="(${choice.id} == *{category.id})"-->
+<!--                                th:readonly="(${choice.id} == *{category.id})"-->
+<!--                                th:text="${choice.description}"></option>-->
+<!--                    </select>-->
+                    <select id="catalog" th:field="*{catalogId}" class="form-control" required>
+                        <option value="" th:disabled="disabled" selected="true" th:text="Select....">Select...</option>
+                        <option th:each="catalog : ${catalogs}"
+                                th:value="${catalog.id}"
+                                th:selected="(${catalog.id} == *{catalogId})"
+                                th:text="${catalog.name}">
+                        </option>
+                    </select>
+
+                </div>
+                <div class="col-md-6">
+                    <label for="webStore" class="form-label">Store</label>
+                    <select id="WebStore" th:field="*{storeId}" class="form-control" required>
+                        <option th:if ="${not #lists.isEmpty(stores)}"value="" th:disabled="disabled" selected="true" th:text="Select....">Select...</option>
+                        <option th:each="store : ${stores}"
+                                th:value="${store.id}"
+                                th:selected="(${store.id} == *{storeId})"
+                                th:text="${store.name}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="col-12 mt-4">
+                    <button type="button" class="btn btn-secondary" onclick="history.go(-1)">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+
+</html>

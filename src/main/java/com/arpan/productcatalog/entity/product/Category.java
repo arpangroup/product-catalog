@@ -43,7 +43,7 @@ public class Category extends Auditable {
     private String description;
 
     @Column(name = "is_active")
-    private boolean isActive;
+    private Boolean isActive = false;
 
     @Column(name = "sort_order", length = 1)
     private Integer sortOrder;

@@ -20,7 +20,7 @@ public final class CategoryMapper {
                 .parentCategoryId(category.getParentCategory() != null ? category.getParentCategory().getId() : null)
                 .parentCategoryName(category.getParentCategory() != null ? category.getParentCategory().getName() : null)
                 .description(category.getDescription())
-                .isActive(category.isActive())
+                .isActive(category.getIsActive())
                 .sortOrder(category.getSortOrder() != null ? category.getSortOrder() : 0)
                 //.numberOfProducts(category.getProducts().size())
                 .activeFrom(category.getActiveFrom())

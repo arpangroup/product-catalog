@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="fragments/fragment.html :: headFragment (pageTitle='index')"></div>
+</head>
+
+<body>
+    <div class="container-fluid">
+
+        <div class="row mt-2">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="mt-0">
+                            <div class="p-2" >
+                                <div style="display: flex;">
+                                    <img src="dist/img/avatar.png" th:src="@{/img/store.png}" class="logo">
+                                    <div class="">
+                                        <h6 th:if="${catalogName != null}" class="card-subtitle">catalog / <a th:href="@{/catalogs/{id}(id=${catalogId})}" th:text="${catalogName}"></a></h6>
+                                        <h5 class="card-subtitle mt-1">Stores</h5>
+                                    </div>
+                                </div>
+                                <div class="btn-group float-right" role="group" aria-label="Basic example" style="margin-top: -40px;">
+                                    <input type="text" class="mr-2" placeholder="Search..." />
+                                    <a type="button" class="btn btn-sm btn-outline-secondary btn-primary" th:href="@{/WebStore/new}">Create New Store</a>
+<!--                                    <button type="button" class="btn btn-sm btn-outline-secondary btn-primary">New</button>-->
+                                </div>
+                            </div>
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Store</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody id="myTable">
+                                    <tr th:each="webStore: ${stores}">
+                                        <td><a href="#" th:href="@{/WebStore/{id}/view(id=${webStore.id})}" th:text="${webStore.name}">PureeatsStore</a></td>
+                                        <td>
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <button type="button" class="btn btn-sm btn-outline-secondary btn-primary">Edit</button>
+                                                <button type="button" class="btn btn-sm btn-outline-secondary btn-primary">Delete</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

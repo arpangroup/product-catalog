@@ -10,6 +10,7 @@ import java.util.List;
 public interface CatalogService {
     List<CatalogSummary> getAllCatalogSummary();
     List<CatalogSummary> getAllCatalogSummary(Long storeId);
+    Catalog createNewCatalog(String catalogName) throws ValidationException;
     Catalog createNewCatalog(Long storeId, String catalogName) throws ValidationException;
     Catalog updateCatalogName(Long catalogId, String newName) throws IdNotFoundException, ValidationException;
     Catalog changeOwner(Long catalogId, String newUser) throws ValidationException;

@@ -2,7 +2,6 @@ package com.arpan.productcatalog.service.impl;
 
 import com.arpan.productcatalog.dto.CatalogSummary;
 import com.arpan.productcatalog.entity.Catalog;
-import com.arpan.productcatalog.entity.Store;
 import com.arpan.productcatalog.exception.IdNotFoundException;
 import com.arpan.productcatalog.exception.ValidationException;
 import com.arpan.productcatalog.mapper.CatalogMapper;
@@ -36,17 +35,25 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
-    public Catalog createNewCatalog(Long storeId, String catalogName) throws ValidationException {
-        Store store = validator.validateStoreIdAndCatalogName(storeId, catalogName);
+    public Catalog createNewCatalog(String catalogName) throws ValidationException {
+        validator.validateCatalogName(catalogName);
         Catalog catalog = new Catalog(catalogName);
-        catalog.attachStore(store);
         return repository.save(catalog);
+    }
+
+    @Override
+    public Catalog createNewCatalog(Long storeId, String catalogName) throws ValidationException {
+//        Store store = validator.validateStoreIdAndCatalogName(storeId, catalogName);
+//        Catalog catalog = new Catalog(catalogName);
+//        catalog.attachStore(store);
+//        return repository.save(catalog);
+        return null;
     }
 
     @Override
     public Catalog updateCatalogName(Long catalogId, String newName) throws IdNotFoundException, ValidationException {
         Catalog catalog = repository.findById(catalogId).orElseThrow(() -> new IdNotFoundException("catalogId not found"));
-        catalog.setCatalogName(newName);
+        catalog.setName(newName);
         try {
             return repository.save(catalog);
         } catch (ConstraintViolationException ex1) {

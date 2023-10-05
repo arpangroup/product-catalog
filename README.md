@@ -29,7 +29,7 @@ spring.datasource.password=
 spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
 ```
 ### Persist the data in H2 Database
-If we want to persist the data in the H2 database, we should store data in a file. To achieve the same, we need to change the datasource URL property.
+If we want to persist the data in the H2 database, we should webStore data in a file. To achieve the same, we need to change the datasource URL property.
 ```
 #persist the data
 spring.datasource.url=jdbc:h2:file:./data/sampledata
